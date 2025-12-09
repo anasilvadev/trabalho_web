@@ -1,4 +1,4 @@
-
+resumo();
 exibir();
 
 /*Cadastrar Salário */
@@ -63,3 +63,38 @@ function exibir() {
         output.appendChild(li)
     }
 }
+
+function resumo() {
+    var resumo = document.getElementById("resumo")
+    resumo.innerHTML = ""
+
+    var salario = parseFloat(localStorage.getItem("salario"))
+    if (!salario) {
+        alert("Cadastre o salário primeiro!")
+        return;
+    }
+
+    var listaDespesas = JSON.parse(localStorage.getItem("lista")) || []
+    var totalDespesas = 0;
+
+    for (let i = 0; i < listaDespesas.length; i++) {
+        totalDespesas += parseFloat(listaDespesas[i].valor);
+    }
+
+    let saldoFinal = salario -  totalDespesas;
+
+    let p1 = document.createElement('p');
+    p1.textContent = "Salário: R$ " + salario.toFixed(2);
+
+    let p2 = document.createElement('p');
+    p2.textContent = "Total de Despesas: R$ " + totalDespesas.toFixed(2);
+
+    let p3 = document.createElement('p');
+    p3.textContent = "Saldo Final: R$ " + saldoFinal.toFixed(2);
+
+    resumo.appendChild(p1);
+    resumo.appendChild(p2);
+    resumo.appendChild(p3);
+}
+
+
