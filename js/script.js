@@ -18,7 +18,7 @@ document.getElementById("casl").addEventListener("click", function () {
     document.getElementById("salario").value = "";
 
     exibir()
-    resumo_Financeiro()
+    resumo()
 
 
 });
@@ -50,7 +50,7 @@ document.getElementById("formDespesas").addEventListener("submit", function (eve
     document.getElementById("formDespesas").reset();
 
     exibir();
-    resumo_Financeiro();
+    resumo();
 });
 
 function exibir() {
@@ -69,11 +69,6 @@ function resumo() {
     resumo.innerHTML = ""
 
     var salario = parseFloat(localStorage.getItem("salario"))
-    if (!salario) {
-        alert("Cadastre o salário primeiro!")
-        return;
-    }
-
     var listaDespesas = JSON.parse(localStorage.getItem("lista")) || []
     var totalDespesas = 0;
 
@@ -81,7 +76,7 @@ function resumo() {
         totalDespesas += parseFloat(listaDespesas[i].valor);
     }
 
-    let saldoFinal = salario -  totalDespesas;
+    let saldoFinal = salario - totalDespesas;
 
     let p1 = document.createElement('p');
     p1.textContent = "Salário: R$ " + salario.toFixed(2);
@@ -97,4 +92,34 @@ function resumo() {
     resumo.appendChild(p3);
 }
 
+function deletarTodas() {
+    if (confirm("Tem certeza que deseja apagar TODAS as despesas?")) {
+        localStorage.removeItem("lista");
+        exibir();
+        resumo();
+    }
+}
+function deletar() {
+    var lista = JSON.parse(localStorage.getItem("lista")) || [];
+    if (lista.length === 0) {
+        alert("Não há despesas para excluir!");
+        return;
+    }
+    lista.shift();
+    localStorage.setItem("lista", JSON.stringify(lista));
 
+    exibir();
+    resumo();
+}
+
+function limpar() {
+    localStorage.removeItem('salario');
+    localStorage.removeItem('lista');
+
+    document.getElementById("output").innerHTML = "";
+    document.getElementById("resumo").innerHTML = ""; 
+
+   
+    exibir();
+    resumo();
+}
