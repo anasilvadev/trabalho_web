@@ -9,12 +9,15 @@
 </head>
 
 <body>
+    <div id=cadastrosal>
     <h1>Cadastro de salário</h1>
     <label for="salario">Salario</label>
     <input type="text" id="salario" placeholder="Ex: 1518" required>
     <br><br>
-     <button id="casl">Cadastrar Salário</button>
+    <button id="casl">Cadastrar Salário</button>
+   </div>
 
+    <div id=formulario>
     <form id="formDespesas">
         <h1>Cadastro de despesas</h1>
         <label for="datalabel">Data:</label>
@@ -26,16 +29,20 @@
 
         <button type="submit">Adicionar</button>
     </form>
+    </div>
 
+    <div id="listaded">
     <h3>Listagem de despesas</h3>
     <ul id="output"></ul>
     <input type="button" value="Deletar todas" onclick="deletarTodas()">
     <input type="button" value="Deletar" onclick="deletar()">
+    </div>
 
-
+    <div id=resumo>
     <h3>Resumo</h3>
     <div id="resumo"></div>
-     <input type="button" value="Limpar" onclick="limpar()">
+    <input type="button" value="Limpar" onclick="limpar()">
+    </div>
 
     <script type="text/javascript" src="js/script.js"></script>
 </body>
